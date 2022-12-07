@@ -15,6 +15,7 @@ contract BlindAuction {
 
     address public highestBidder;
     uint public highestBid;
+    uint public secondHighestBid;
 
     // Allowed withdrawals of previous bids
     mapping(address => uint) pendingReturns;
@@ -53,6 +54,8 @@ contract BlindAuction {
         beneficiary = beneficiaryAddress;
         biddingEnd = block.timestamp + biddingTime;
         revealEnd = biddingEnd + revealTime;
+        highestBid = 0;
+        secondHighestBid = 0;
     }
 
     /// Place a blinded bid with `blindedBid` =
@@ -135,9 +138,17 @@ contract BlindAuction {
         onlyAfter(revealEnd)
     {
         if (ended) revert AuctionEndAlreadyCalled();
+        if (secondHighestBid == 0) {
+            /// No second highest bidder was set.
+            /// All the money will get back to the highest bidder.
+            payable(highestBidder).transfer(highestBid);
+        }
+        else {
+            payable(highestBidder).transfer(highestBid-secondHighestBid);
+            beneficiary.transfer(secondHighestBid);
+        }
         emit AuctionEnded(highestBidder, highestBid);
         ended = true;
-        beneficiary.transfer(highestBid);
     }
 
     // This is an "internal" function which means that it
@@ -146,13 +157,18 @@ contract BlindAuction {
     function placeBid(address bidder, uint value) internal
             returns (bool success)
     {
-        if (value <= highestBid) {
+        if (value <= highestBid && value <= secondHighestBid) {
+            return false;
+        }
+        else if (value <= highestBid && value > secondHighestBid) {
+            secondHighestBid = value;
             return false;
         }
         if (highestBidder != address(0)) {
             // Refund the previously highest bidder.
             pendingReturns[highestBidder] += highestBid;
         }
+        secondHighestBid = highestBid;
         highestBid = value;
         highestBidder = bidder;
         return true;
