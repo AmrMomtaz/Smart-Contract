@@ -115,7 +115,6 @@ contract BlindAuction {
             // the same deposit.
             bidToCheck.blindedBid = bytes32(0);
         }
-        // Change this line
         payable(msg.sender).transfer(refund);
     }
 
