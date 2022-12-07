@@ -21,6 +21,7 @@ contract BlindAuction {
     mapping(address => uint) pendingReturns;
 
     event AuctionEnded(address winner, uint highestBid);
+    event AuctionEnded();
 
     // Errors that describe failures.
 
@@ -139,15 +140,16 @@ contract BlindAuction {
     {
         if (ended) revert AuctionEndAlreadyCalled();
         if (secondHighestBid == 0) {
-            /// No second highest bidder was set.
+            /// No second highest bid was set.
             /// All the money will get back to the highest bidder.
             payable(highestBidder).transfer(highestBid);
+            emit AuctionEnded();
         }
         else {
             payable(highestBidder).transfer(highestBid-secondHighestBid);
             beneficiary.transfer(secondHighestBid);
+            emit AuctionEnded(highestBidder, secondHighestBid);
         }
-        emit AuctionEnded(highestBidder, highestBid);
         ended = true;
     }
 
