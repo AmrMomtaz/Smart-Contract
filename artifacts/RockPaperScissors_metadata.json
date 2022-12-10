@@ -23,13 +23,58 @@
 			},
 			{
 				"inputs": [],
+				"name": "gamedEnded",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "noRightToAnnounceTheResult",
+				"type": "error"
+			},
+			{
+				"inputs": [],
 				"name": "noRightToPick",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "noRightToReveal",
 				"type": "error"
 			},
 			{
 				"inputs": [],
 				"name": "userAlreadyCommited",
 				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "userAlreadyRevealed",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "wrongData",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "announceResult",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "ended",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
 				"inputs": [],
@@ -47,6 +92,32 @@
 			{
 				"inputs": [],
 				"name": "hasPickedB",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "hasRevealedA",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "hasRevealedB",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -85,6 +156,32 @@
 			},
 			{
 				"inputs": [],
+				"name": "pickA",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "pickB",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "prize",
 				"outputs": [
 					{
@@ -94,6 +191,24 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "pick",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "nonce",
+						"type": "string"
+					}
+				],
+				"name": "reveal",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -130,14 +245,39 @@
 		},
 		"userdoc": {
 			"errors": {
+				"gamedEnded()": [
+					{
+						"notice": "The game has already ended."
+					}
+				],
+				"noRightToAnnounceTheResult()": [
+					{
+						"notice": "User has no right to announce the result."
+					}
+				],
 				"noRightToPick()": [
 					{
 						"notice": "User doesn't have the right to pick."
 					}
 				],
+				"noRightToReveal()": [
+					{
+						"notice": "User doesn't have the right to reveal."
+					}
+				],
 				"userAlreadyCommited()": [
 					{
 						"notice": "User have already commited before."
+					}
+				],
+				"userAlreadyRevealed()": [
+					{
+						"notice": "User have already revealed before."
+					}
+				],
+				"wrongData()": [
+					{
+						"notice": "User has entered wrong data while revealing"
 					}
 				]
 			},
@@ -163,11 +303,11 @@
 	},
 	"sources": {
 		"RockPaperScissors.sol": {
-			"keccak256": "0xcd9de84de6297a3cb396b5b3e96eb57d3ef4588f47b6520d3c5bdb737f548a57",
+			"keccak256": "0x64b82b18c34471cde754ae57389a93e908be59459d2a72e5fe30b754c9d9adbc",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://370988c685a67a94fadda1d9d878505280bed273cf285604f5fc3e53785a0baf",
-				"dweb:/ipfs/QmSwrfu4UcYhiwywG2YFHC2RmSAuMmHjwdf1W1cizkH6Br"
+				"bzz-raw://f73580ea555fee89ed6a85f6855e4e59cde6fd65c29c881335b92b9333d4f95b",
+				"dweb:/ipfs/QmXiZDe24R5b4h7MhGFGhnvPT54aBWCVeUMn64vpSMDqXa"
 			]
 		}
 	},
