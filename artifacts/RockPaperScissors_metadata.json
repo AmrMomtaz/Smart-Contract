@@ -1,0 +1,175 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "userA_in",
+						"type": "address"
+					},
+					{
+						"internalType": "address payable",
+						"name": "userB_in",
+						"type": "address"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "noRightToPick",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "userAlreadyCommited",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "hasPickedA",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "hasPickedB",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "manager",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "userPick",
+						"type": "bytes32"
+					}
+				],
+				"name": "pick",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "prize",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "userA",
+				"outputs": [
+					{
+						"internalType": "address payable",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "userB",
+				"outputs": [
+					{
+						"internalType": "address payable",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"errors": {
+				"noRightToPick()": [
+					{
+						"notice": "User doesn't have the right to pick."
+					}
+				],
+				"userAlreadyCommited()": [
+					{
+						"notice": "User have already commited before."
+					}
+				]
+			},
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"RockPaperScissors.sol": "RockPaperScissors"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"RockPaperScissors.sol": {
+			"keccak256": "0xcd9de84de6297a3cb396b5b3e96eb57d3ef4588f47b6520d3c5bdb737f548a57",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://370988c685a67a94fadda1d9d878505280bed273cf285604f5fc3e53785a0baf",
+				"dweb:/ipfs/QmSwrfu4UcYhiwywG2YFHC2RmSAuMmHjwdf1W1cizkH6Br"
+			]
+		}
+	},
+	"version": 1
+}
