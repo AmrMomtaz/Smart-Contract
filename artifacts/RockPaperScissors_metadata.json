@@ -159,9 +159,9 @@
 				"name": "pickA",
 				"outputs": [
 					{
-						"internalType": "string",
+						"internalType": "bytes32",
 						"name": "",
-						"type": "string"
+						"type": "bytes32"
 					}
 				],
 				"stateMutability": "view",
@@ -172,9 +172,9 @@
 				"name": "pickB",
 				"outputs": [
 					{
-						"internalType": "string",
+						"internalType": "bytes32",
 						"name": "",
-						"type": "string"
+						"type": "bytes32"
 					}
 				],
 				"stateMutability": "view",
@@ -303,11 +303,11 @@
 	},
 	"sources": {
 		"RockPaperScissors.sol": {
-			"keccak256": "0x64b82b18c34471cde754ae57389a93e908be59459d2a72e5fe30b754c9d9adbc",
+			"keccak256": "0x0462eecf2e1960fcff3982bb6df6c214a28ce9aa6827f5c9812d5dc2f556fdc0",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://f73580ea555fee89ed6a85f6855e4e59cde6fd65c29c881335b92b9333d4f95b",
-				"dweb:/ipfs/QmXiZDe24R5b4h7MhGFGhnvPT54aBWCVeUMn64vpSMDqXa"
+				"bzz-raw://678ca49db55bc6ead66dda6e8c8ad9f5f859ea0296e44ab6f9bd3aa57870cb07",
+				"dweb:/ipfs/QmQnqEJf6vjhL4DtRgAekfMQ9Nk7pufGfcgWzzvZbFUfbb"
 			]
 		}
 	},

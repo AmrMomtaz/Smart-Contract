@@ -17,9 +17,9 @@ contract RockPaperScissors {
     // Flags to detect whether userA and userB has already revealed or not
     bool public hasRevealedA;
     bool public hasRevealedB;
-    // Picks of the users
-    string public pickA;
-    string public pickB;
+    // Picks of the users hashes
+    bytes32 public pickA;
+    bytes32 public pickB;
     // Flag to detect if the game has ended
     bool public ended; 
 
@@ -97,11 +97,11 @@ contract RockPaperScissors {
 
         if (msg.sender == userA && hasPickedA == true && commitmentA == keccak256(abi.encodePacked(pick, nonce))) {
             hasRevealedA = true;
-            pickA = pick;
+            pickA = keccak256(bytes(pick));
         }
         else if (hasPickedB == true && commitmentB == keccak256(abi.encodePacked(pick, nonce))) {
             hasRevealedB = true;
-            pickB = pick;
+            pickB = keccak256(bytes(pick));
         }
         else revert wrongData();
     }
@@ -112,15 +112,62 @@ contract RockPaperScissors {
         if (ended == true) revert gamedEnded();
         if (msg.sender != manager && msg.sender != userA && msg.sender != userB)
             revert noRightToAnnounceTheResult();
-        if (hasRevealedA == true && hasRevealedB == true) {
-            // TODO
+        ended = true;
+        prize = 0;
+        if (hasRevealedA == true && hasRevealedB == true) { // Both revealed
+            uint stateA = parseUserPick(pickA);
+            uint stateB = parseUserPick(pickB);
+            if (stateA > 0 && stateB > 0) { // Both inputs are correct
+                // Implementing rock paper scissors rules.
+                // (1,rock) (2,papper) (3,scissors)
+                if (stateA == 1) {
+                    if (stateB == 1) {
+                        userA.transfer((prize/2));
+                        userB.transfer((prize/2));
+                    }
+                    else if (stateB == 2) userB.transfer(prize);
+                    else userA.transfer(prize);
+                }
+                else if (stateA == 2) {
+                    if (stateB == 1) userA.transfer(prize);
+                    else if (stateB == 2) {
+                        userA.transfer((prize/2));
+                        userB.transfer((prize/2));
+                    }
+                    else userB.transfer(prize);
+                }
+                else {
+                    if (stateB == 1) userB.transfer(prize);
+                    else if (stateB == 2) userA.transfer((prize/2));
+                    else {
+                        userA.transfer((prize/2));
+                        userB.transfer((prize/2));
+                    }
+                }
+            }
+            else if (stateA > 0 && stateB == 0) userA.transfer(prize);
+            else if (stateA == 0 && stateB > 0) userB.transfer(prize);
+            else  { // Both are incorrect
+                userA.transfer((prize/2));
+                userB.transfer((prize/2));
+            }
         }
         else if (hasRevealedA == true && hasRevealedB == false) userA.transfer(prize);
         else if (hasRevealedA == false && hasRevealedB == true) userB.transfer(prize);
-        else if (hasRevealedA == false && hasRevealedB == false) {
+        else { // Both didn't reveal
             userA.transfer((prize/2));
             userB.transfer((prize/2));
         }
-        ended = true;
+    }
+
+    // Private helper functions
+
+    // Returns integer which represent the state of the pick of certain user
+    // 0 -> Wrong pick || 1 -> Rock || 2 -> Papper || 3 -> Scissors
+    function parseUserPick(bytes32 pick) internal pure returns (uint state) {
+        if (pick == keccak256("rock")) return 1;
+        else if (pick == keccak256("paper")) return 2;
+        else if (pick == keccak256("scissors")) return 3;
+        return 0;
     }
 }
