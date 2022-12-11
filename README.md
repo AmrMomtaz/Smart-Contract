@@ -1,6 +1,6 @@
 # Smart-Contract
 
-Assignments from <b>Blockchain</b> course.<br>
+Assignment from <b>Blockchain</b> course.<br>
 There are two smart contracts:
 
 ## BlindAuction.sol
