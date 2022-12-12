@@ -6,6 +6,9 @@ contract RockPaperScissors {
     address payable public userA;
     address payable public userB;
     address public manager;
+    // Specifies duration of each phase in MINUTES
+    uint public pickEnd;
+    uint public revealEnd;
     // Game prize
     uint public prize;
     // Flags to detect whether userA and userB has decided their picks
@@ -30,6 +33,12 @@ contract RockPaperScissors {
 
     /// The competitors should be different
     error sameUserAddresses();
+    /// The function has been called too early.
+    /// Try again at `time`.
+    error TooEarly(uint time);
+    /// The function has been called too late.
+    /// It cannot be called after `time`.
+    error TooLate(uint time);
     /// User have already commited before.
     error userAlreadyCommited();
     /// User doesn't have the right to pick.
@@ -65,17 +74,30 @@ contract RockPaperScissors {
         if (user == userB && hasRevealedB == true) revert userAlreadyRevealed();
         _;
     }
+    // Validates that functions are called within the specifed period.
+    modifier onlyBefore(uint time) {
+        if (block.timestamp >= time) revert TooLate(time);
+        _;
+    }
+    modifier onlyAfter(uint time) {
+        if (block.timestamp <= time) revert TooEarly(time);
+        _;
+    }
 
     // Constructor for the contract
     constructor(
         address payable userA_in,
-        address payable userB_in
+        address payable userB_in,
+        uint pickDuration,
+        uint revealDuration
     ) payable {
         if (userA_in == userB_in) revert sameUserAddresses();
         userA = userA_in;
         userB = userB_in;
         manager = msg.sender;
         prize = msg.value;
+        pickEnd = block.timestamp + pickDuration*60;
+        revealEnd = pickEnd + revealDuration*60;
         hasPickedA = false;
         hasPickedB = false;
         hasRevealedA = false;
@@ -85,7 +107,8 @@ contract RockPaperScissors {
     
     // This function is called by the user in the pick phase.
     function pick(bytes32 userPick) external 
-        onlyHaveRightToPick(msg.sender) {
+        onlyHaveRightToPick(msg.sender) 
+        onlyBefore(pickEnd) {
 
         if (msg.sender == userA) {
             hasPickedA = true;
@@ -99,7 +122,9 @@ contract RockPaperScissors {
 
     // This function is called by the user in the revealing phase.
     function reveal(string calldata pick, string calldata nonce) external
-        onlyHaveRightToReveal(msg.sender) {
+        onlyHaveRightToReveal(msg.sender)
+        onlyAfter(pickEnd)
+        onlyBefore(revealEnd) {
 
         if (msg.sender == userA && hasPickedA == true && commitmentA == keccak256(abi.encodePacked(pick, nonce))) {
             hasRevealedA = true;
@@ -114,7 +139,9 @@ contract RockPaperScissors {
 
     // This function is called by the manager or userA or userB
     // to announce the winner so he gets his prize.
-    function announceResult() external {
+    function announceResult() external 
+        onlyAfter(revealEnd){
+
         if (ended == true) revert gamedEnded();
         if (msg.sender != manager && msg.sender != userA && msg.sender != userB)
             revert noRightToAnnounceTheResult();

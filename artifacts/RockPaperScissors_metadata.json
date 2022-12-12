@@ -16,10 +16,42 @@
 						"internalType": "address payable",
 						"name": "userB_in",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "pickDuration",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "revealDuration",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "payable",
 				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "time",
+						"type": "uint256"
+					}
+				],
+				"name": "TooEarly",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "time",
+						"type": "uint256"
+					}
+				],
+				"name": "TooLate",
+				"type": "error"
 			},
 			{
 				"inputs": [],
@@ -206,6 +238,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "pickEnd",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "prize",
 				"outputs": [
 					{
@@ -233,6 +278,19 @@
 				"name": "reveal",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "revealEnd",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -269,6 +327,16 @@
 		},
 		"userdoc": {
 			"errors": {
+				"TooEarly(uint256)": [
+					{
+						"notice": "The function has been called too early. Try again at `time`."
+					}
+				],
+				"TooLate(uint256)": [
+					{
+						"notice": "The function has been called too late. It cannot be called after `time`."
+					}
+				],
 				"gamedEnded()": [
 					{
 						"notice": "The game has already ended."
@@ -332,11 +400,11 @@
 	},
 	"sources": {
 		"RockPaperScissors.sol": {
-			"keccak256": "0x85fa9d7e974073b8ccddb9dd4cbcd4b3aa5bf61c8fed5cd23785d44613c50c76",
+			"keccak256": "0x3e3f74029ccf26ad6f567c8d6b3c7f6c351fb46d0e00879b892b783832b932fc",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://ff31f4896f8ee0210fed815347c173771baf9401648066c6b5971d079b1c4d7a",
-				"dweb:/ipfs/QmUp4C962QYzrqnxvi6DXiAsukYAHRZFdeHQVmk2eDGY3U"
+				"bzz-raw://f59f8dfe30ae58bbd2009ddd842032894458f15795e100827673d47fc3db7bb8",
+				"dweb:/ipfs/QmdkAFrLyYXRAA1Cg2FbkLio79Bdt5mkX4UkYxoWAz8mPv"
 			]
 		}
 	},
