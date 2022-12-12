@@ -39,11 +39,11 @@ contract RockPaperScissors {
     /// The function has been called too late.
     /// It cannot be called after `time`.
     error TooLate(uint time);
-    /// User have already commited before.
+    /// User has already commited before.
     error userAlreadyCommited();
     /// User doesn't have the right to pick.
     error noRightToPick();
-    /// User have already revealed before.
+    /// User has already revealed before.
     error userAlreadyRevealed();
     /// User doesn't have the right to reveal.
     error noRightToReveal();

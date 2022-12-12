@@ -364,12 +364,12 @@
 				],
 				"userAlreadyCommited()": [
 					{
-						"notice": "User have already commited before."
+						"notice": "User has already commited before."
 					}
 				],
 				"userAlreadyRevealed()": [
 					{
-						"notice": "User have already revealed before."
+						"notice": "User has already revealed before."
 					}
 				],
 				"wrongData()": [
@@ -400,11 +400,11 @@
 	},
 	"sources": {
 		"RockPaperScissors.sol": {
-			"keccak256": "0x3e3f74029ccf26ad6f567c8d6b3c7f6c351fb46d0e00879b892b783832b932fc",
+			"keccak256": "0x06741714bdf3246c67e1bebae4d81b5d91f11698d89bee136bd902b1a2a0399d",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://f59f8dfe30ae58bbd2009ddd842032894458f15795e100827673d47fc3db7bb8",
-				"dweb:/ipfs/QmdkAFrLyYXRAA1Cg2FbkLio79Bdt5mkX4UkYxoWAz8mPv"
+				"bzz-raw://2f71b42a07b6c43b839680aad88fa4b286505d236b4d619c1f8afe2d38417924",
+				"dweb:/ipfs/QmYnP1Ypvc6R2kBERRYeciYhyywW94v6F1X3vFzySmeFJT"
 			]
 		}
 	},
