@@ -19,7 +19,7 @@ Write a smart contract that would enable the participants to run the protocol. A
 
 ### Explanation and Assumptions:
 
-1) The manager deploys the contract and he pays the prize of the game and indicates the commitment period (picking phase) and the revealing period and the addresses of both user A and user B which are the competitors.
+1) The manager deploys the contract and he pays the prize of the game and indicates the commitment period (picking phase) and the revealing period (both periods are specified in <b>MINUTES</b>) and the addresses of both user A and user B which are the competitors (They must be different).
 2) The commitment phase begins where user A and user B are allowed to commit their picks where they pick rock, paper or scissors and they concatenate a nonce used for hiding and bidding properties.
 3) Each user is allowed to pick only once and can’t change his commitment anytime after that.
 4) Each user must pick either <b>“rock”</b>, <b>“paper”</b> or <b>“scissors”</b> and concatenate the nonce to it. Please consider the following assumptions:<br>
