@@ -43,6 +43,11 @@
 			},
 			{
 				"inputs": [],
+				"name": "sameUserAddresses",
+				"type": "error"
+			},
+			{
+				"inputs": [],
 				"name": "userAlreadyCommited",
 				"type": "error"
 			},
@@ -55,6 +60,25 @@
 				"inputs": [],
 				"name": "wrongData",
 				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "winner",
+						"type": "address"
+					}
+				],
+				"name": "announceWinner",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [],
+				"name": "tie",
+				"type": "event"
 			},
 			{
 				"inputs": [],
@@ -265,6 +289,11 @@
 						"notice": "User doesn't have the right to reveal."
 					}
 				],
+				"sameUserAddresses()": [
+					{
+						"notice": "The competitors should be different"
+					}
+				],
 				"userAlreadyCommited()": [
 					{
 						"notice": "User have already commited before."
@@ -303,11 +332,11 @@
 	},
 	"sources": {
 		"RockPaperScissors.sol": {
-			"keccak256": "0x0462eecf2e1960fcff3982bb6df6c214a28ce9aa6827f5c9812d5dc2f556fdc0",
+			"keccak256": "0x85fa9d7e974073b8ccddb9dd4cbcd4b3aa5bf61c8fed5cd23785d44613c50c76",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://678ca49db55bc6ead66dda6e8c8ad9f5f859ea0296e44ab6f9bd3aa57870cb07",
-				"dweb:/ipfs/QmQnqEJf6vjhL4DtRgAekfMQ9Nk7pufGfcgWzzvZbFUfbb"
+				"bzz-raw://ff31f4896f8ee0210fed815347c173771baf9401648066c6b5971d079b1c4d7a",
+				"dweb:/ipfs/QmUp4C962QYzrqnxvi6DXiAsukYAHRZFdeHQVmk2eDGY3U"
 			]
 		}
 	},

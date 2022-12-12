@@ -23,8 +23,13 @@ contract RockPaperScissors {
     // Flag to detect if the game has ended
     bool public ended; 
 
+    event announceWinner(address winner);
+    event tie();
+
     // Errors which can occur
 
+    /// The competitors should be different
+    error sameUserAddresses();
     /// User have already commited before.
     error userAlreadyCommited();
     /// User doesn't have the right to pick.
@@ -66,6 +71,7 @@ contract RockPaperScissors {
         address payable userA_in,
         address payable userB_in
     ) payable {
+        if (userA_in == userB_in) revert sameUserAddresses();
         userA = userA_in;
         userB = userB_in;
         manager = msg.sender;
@@ -113,7 +119,6 @@ contract RockPaperScissors {
         if (msg.sender != manager && msg.sender != userA && msg.sender != userB)
             revert noRightToAnnounceTheResult();
         ended = true;
-        prize = 0;
         if (hasRevealedA == true && hasRevealedB == true) { // Both revealed
             uint stateA = parseUserPick(pickA);
             uint stateB = parseUserPick(pickB);
@@ -122,42 +127,78 @@ contract RockPaperScissors {
                 // (1,rock) (2,papper) (3,scissors)
                 if (stateA == 1) {
                     if (stateB == 1) {
+                        emit tie();
                         userA.transfer((prize/2));
                         userB.transfer((prize/2));
                     }
-                    else if (stateB == 2) userB.transfer(prize);
-                    else userA.transfer(prize);
+                    else if (stateB == 2) {
+                        emit announceWinner(userB);
+                        userB.transfer(prize);
+                    }
+                    else {
+                        emit announceWinner(userA);
+                        userA.transfer(prize);
+                    }
                 }
                 else if (stateA == 2) {
-                    if (stateB == 1) userA.transfer(prize);
+                    if (stateB == 1) {
+                        emit announceWinner(userA);
+                        userA.transfer(prize);
+                    }
                     else if (stateB == 2) {
+                        emit tie();
                         userA.transfer((prize/2));
                         userB.transfer((prize/2));
                     }
-                    else userB.transfer(prize);
+                    else {
+                        emit announceWinner(userB);
+                        userB.transfer(prize);
+                    }
                 }
                 else {
-                    if (stateB == 1) userB.transfer(prize);
-                    else if (stateB == 2) userA.transfer((prize/2));
+                    if (stateB == 1) {
+                        emit announceWinner(userB);
+                        userB.transfer(prize);
+                    }
+                    else if (stateB == 2) {
+                        emit announceWinner(userA);
+                        userA.transfer(prize);
+                    }
                     else {
+                        emit tie();
                         userA.transfer((prize/2));
                         userB.transfer((prize/2));
                     }
                 }
             }
-            else if (stateA > 0 && stateB == 0) userA.transfer(prize);
-            else if (stateA == 0 && stateB > 0) userB.transfer(prize);
+            else if (stateA > 0 && stateB == 0) {
+                emit announceWinner(userA);
+                userA.transfer(prize);
+            }
+            else if (stateA == 0 && stateB > 0) {
+                emit announceWinner(userB);
+                userB.transfer(prize);
+            }
             else  { // Both are incorrect
+                emit tie();
                 userA.transfer((prize/2));
                 userB.transfer((prize/2));
             }
         }
-        else if (hasRevealedA == true && hasRevealedB == false) userA.transfer(prize);
-        else if (hasRevealedA == false && hasRevealedB == true) userB.transfer(prize);
+        else if (hasRevealedA == true && hasRevealedB == false) {
+            emit announceWinner(userA);
+            userA.transfer(prize);
+        }
+        else if (hasRevealedA == false && hasRevealedB == true) {
+            emit announceWinner(userB);
+            userB.transfer(prize);
+        }
         else { // Both didn't reveal
+            emit tie();
             userA.transfer((prize/2));
             userB.transfer((prize/2));
         }
+        prize = 0;
     }
 
     // Private helper functions
