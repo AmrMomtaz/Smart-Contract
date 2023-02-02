@@ -1,7 +1,7 @@
 # Smart-Contract
 
 Assignment from <b>Blockchain</b> course.<br>
-There are two smart contracts:
+This repository includes two contracts:
 
 ## BlindAuction.sol
 
